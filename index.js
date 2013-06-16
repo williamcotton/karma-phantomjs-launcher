@@ -7,7 +7,7 @@ var PhantomJSBrowser = function(baseBrowserDecorator) {
   this._start = function(url) {
     // create the js file, that will open karma
     var captureFile = this._tempDir + '/capture.js';
-    var captureCode = '(new WebPage()).open("' + url + '");';
+    var captureCode = 'var page = new WebPage(); page.localToRemoteUrlAccessEnabled = true; page.webSecurity = false; page.ignoreSslErrors = true; page.open("' + url + '");';
     fs.writeFileSync(captureFile, captureCode);
 
     // and start phantomjs
